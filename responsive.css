@@ -1,0 +1,139 @@
+/* ============== 
+   1. Global Scaling & Layout 
+=================*/
+html {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Fluid Typography */
+.top-section .top-content h1 { font-size: clamp(2rem, 8vw, 5rem); }
+.top-section .top-content i { font-size: clamp(3.5rem, 15vw, 9rem); }
+.section-heading { font-size: clamp(1.8rem, 5vw, 3rem); text-align: center; }
+.section-para { text-align: center; padding: 0 15px; }
+
+/* ============== 
+   2. Navigation (Mobile/Tablet)
+=================*/
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    font-size: 1.8rem;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 5px;
+}
+
+@media (max-width: 992px) {
+    .header-container { padding: 1rem; }
+    
+    .menu-toggle { display: block; order: 2; }
+    .right { order: 3; }
+    .left { order: 1; }
+
+    nav.center {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--bg-color);
+        border-bottom: 2px solid var(--primary-green);
+        display: none; /* Controlled by JS '.open' class or media logic */
+        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    }
+
+    nav.center.open {
+        display: block;
+    }
+
+    nav.center ul {
+        flex-direction: column;
+        gap: 0;
+        padding: 1rem 0;
+    }
+
+    nav.center ul li {
+        margin: 0;
+        width: 100%;
+    }
+
+    nav.center ul li a {
+        display: block;
+        padding: 15px;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+}
+
+/* ============== 
+   3. Breakpoint: Laptop (769px–1024px)
+=================*/
+@media (max-width: 1024px) {
+    .about-second { gap: 30px; }
+    .about-right img { width: 90%; }
+    .skills-container, .projects, .contact-cards-container {
+        padding: 0 20px;
+    }
+}
+
+/* ============== 
+   4. Breakpoint: Tablet (481px–768px)
+=================*/
+@media (max-width: 768px) {
+    .about-second {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+    
+    .about-right { text-align: center; margin-bottom: 30px; }
+    .about-right img { width: 80%; border-width: 15px; }
+
+    .card-container, .skills-container, .projects {
+        justify-content: center;
+    }
+
+    .top-section .top-content h4 { font-size: 1.4rem; }
+}
+
+/* ============== 
+   5. Breakpoint: Mobile (320px–480px)
+=================*/
+@media (max-width: 480px) {
+    .top-section { padding: 80px 15px 40px; }
+    .top-section .top-content i { padding: 20px; }
+    
+    .button-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .cta-btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .card, .skill-card, .contact-card {
+        width: 100%;
+        margin: 0 10px;
+    }
+
+    .timeline-content {
+        margin-left: 25px;
+        padding: 15px;
+    }
+
+    .timeline::before { left: 10px; }
+    .timeline-dot { left: 3px; }
+
+    /* Fix Carousel heights for mobile */
+    #certificateCarousel .carousel-item img {
+        max-height: 40vh;
+        border-width: 8px;
+    }
+}
