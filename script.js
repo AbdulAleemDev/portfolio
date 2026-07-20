@@ -108,3 +108,28 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === 'Escape') closeMenu();
   });
 });
+
+// Projects slider navigation logic
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("projects-container");
+  const prevBtn = document.getElementById("project-prev");
+  const nextBtn = document.getElementById("project-next");
+
+  if (!container || !prevBtn || !nextBtn) return;
+
+  const scrollAmount = 370; // card width (350px) + gap (20px)
+
+  prevBtn.addEventListener("click", () => {
+    container.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth"
+    });
+  });
+
+  nextBtn.addEventListener("click", () => {
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth"
+    });
+  });
+});

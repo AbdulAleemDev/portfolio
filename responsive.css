@@ -11,9 +11,9 @@ body {
 }
 
 /* Fluid Typography */
-.top-section .top-content h1 { font-size: clamp(2rem, 8vw, 5rem); }
-.top-section .top-content i { font-size: clamp(3.5rem, 15vw, 9rem); }
-.section-heading { font-size: clamp(1.8rem, 5vw, 3rem); text-align: center; }
+.top-section .top-content h1 { font-size: clamp(2.2rem, 8vw, 5rem); }
+.top-section .top-content i { font-size: clamp(4rem, 15vw, 9rem); }
+.section-heading { font-size: clamp(2rem, 5vw, 3rem); text-align: center; }
 .section-para { text-align: center; padding: 0 15px; }
 
 /* ============== 
@@ -27,14 +27,27 @@ body {
     color: var(--text-color);
     cursor: pointer;
     padding: 5px;
+    transition: color 0.3s ease;
 }
 
 @media (max-width: 992px) {
-    .header-container { padding: 1rem; }
+    .header-container { 
+        padding: 1rem 1.5rem; 
+        position: relative;
+    }
     
-    .menu-toggle { display: block; order: 2; }
-    .right { order: 3; }
-    .left { order: 1; }
+    .menu-toggle { 
+        display: block; 
+        order: 3; 
+    }
+    .left { 
+        order: 1; 
+        margin-right: auto; /* Push theme toggle and hamburger to the right */
+    }
+    .toggle-btn { 
+        order: 2; 
+        margin-right: 15px; /* Add spacing between theme toggle and hamburger button */
+    }
 
     nav.center {
         position: absolute;
@@ -43,12 +56,18 @@ body {
         width: 100%;
         background: var(--bg-color);
         border-bottom: 2px solid var(--primary-green);
-        display: none; /* Controlled by JS '.open' class or media logic */
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        display: none; /* Controlled by JS '.open' class */
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     nav.center.open {
         display: block;
+        opacity: 1;
+        transform: translateY(0);
     }
 
     nav.center ul {
@@ -60,17 +79,18 @@ body {
     nav.center ul li {
         margin: 0;
         width: 100%;
+        text-align: center;
     }
 
     nav.center ul li a {
         display: block;
         padding: 15px;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
 }
 
 /* ============== 
-   3. Breakpoint: Laptop (769px–1024px)
+   3. Breakpoint: Laptop / Large Tablet (769px–1024px)
 =================*/
 @media (max-width: 1024px) {
     .about-second { gap: 30px; }
@@ -81,34 +101,71 @@ body {
 }
 
 /* ============== 
-   4. Breakpoint: Tablet (481px–768px)
+   4. Breakpoint: Tablet (577px–768px)
 =================*/
 @media (max-width: 768px) {
     .about-second {
         flex-direction: column-reverse;
         text-align: center;
+        gap: 40px;
     }
     
-    .about-right { text-align: center; margin-bottom: 30px; }
-    .about-right img { width: 80%; border-width: 15px; }
+    .about-right { 
+        text-align: center; 
+        margin-bottom: 20px; 
+    }
+    
+    .about-right img { 
+        width: 75%; 
+        border-width: 15px; 
+    }
 
-    .card-container, .skills-container, .projects {
+    /* Wrap cards on tablet for clean grid */
+    .card-container, .skills-container {
+        flex-wrap: wrap;
         justify-content: center;
+        overflow-x: visible;
+        padding: 20px;
+    }
+
+    .card {
+        flex: 1 1 calc(50% - 20px);
+        min-width: 250px;
+        max-width: 100%;
+    }
+
+    .skill-card {
+        flex: 1 1 calc(50% - 20px);
+        min-width: 280px;
+        max-width: 100%;
+    }
+
+    .projects-slider-wrapper {
+        padding: 0 15px;
+    }
+
+    .slider-arrow {
+        display: none;
+    }
+
+    .project-card {
+        flex: 0 0 310px;
     }
 
     .top-section .top-content h4 { font-size: 1.4rem; }
 }
 
 /* ============== 
-   5. Breakpoint: Mobile (320px–480px)
+   5. Breakpoint: Mobile (320px–576px)
 =================*/
-@media (max-width: 480px) {
-    .top-section { padding: 80px 15px 40px; }
+@media (max-width: 576px) {
+    .top-section { padding: 60px 15px 40px; }
     .top-section .top-content i { padding: 20px; }
     
     .button-container {
         flex-direction: column;
         align-items: center;
+        gap: 12px;
         width: 100%;
     }
 
@@ -116,24 +173,48 @@ body {
         width: 100%;
         max-width: 280px;
         text-align: center;
+        padding: 12px 24px;
+        font-size: 1rem;
+    }
+
+    /* Stacking card lists in single column on mobile */
+    .card-container, .skills-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        overflow-x: visible;
+        padding: 10px 0;
     }
 
     .card, .skill-card, .contact-card {
         width: 100%;
-        margin: 0 10px;
+        flex: 1 1 100%;
+        margin: 10px 0;
     }
 
     .timeline-content {
-        margin-left: 25px;
+        margin-left: 20px;
         padding: 15px;
     }
 
-    .timeline::before { left: 10px; }
-    .timeline-dot { left: 3px; }
-
-    /* Fix Carousel heights for mobile */
+    /* Fix Carousel heights and borders for mobile */
+    #certificateCarousel {
+        margin: 40px auto;
+    }
+    
     #certificateCarousel .carousel-item img {
-        max-height: 40vh;
-        border-width: 8px;
+        max-height: 45vh;
+        border-width: 10px;
+    }
+    
+    .section-heading {
+        font-size: 2.2rem;
+    }
+
+    .projects-slider-wrapper {
+        padding: 0 10px;
+    }
+
+    .project-card {
+        flex: 0 0 280px;
     }
 }
