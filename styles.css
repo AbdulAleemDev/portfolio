@@ -1338,6 +1338,10 @@ body.dark-mode .carousel-control-next-btn {
   margin: 0 auto 25px auto;
   letter-spacing: -0.5px;
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.4s ease;
+}
+
+.section-heading span {
+  display: inline-block;
   animation: dynamic-heading-glow 2.2s infinite ease-in-out;
 }
 
@@ -1383,7 +1387,6 @@ body.dark-mode .section-heading {
 .section-heading:hover {
   transform: scale(1.07);
   filter: drop-shadow(0 0 15px rgba(16, 185, 129, 0.35));
-  animation: none;
 }
 
 .section-para {
