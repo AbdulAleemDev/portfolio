@@ -466,19 +466,65 @@ body.dark-mode .tilt-container:hover img {
 
 .card {
     background: var(--secondary-color);
-    border-radius: 10px;
+    border-radius: 12px;
     box-shadow: var(--card-shadow);
-    padding: 20px;       /* Reduced padding slightly for better fit */
+    padding: 25px 20px;
     text-align: left;
-    flex: 1;             /* Allows cards to grow/shrink equally */
-    min-width: 250px;    /* Prevents cards from getting too squished */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
     cursor: pointer;
+    border: 1px solid transparent;
 }
 
-.card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); }
+.card::before, .skill-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.12), transparent 80%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+body.dark-mode .card::before, body.dark-mode .skill-card::before {
+    background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.18), transparent 80%);
+}
+
+.card:hover::before, .skill-card:hover::before {
+    opacity: 1;
+}
+
+.card > *, .skill-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+body.dark-mode .card:hover {
+    box-shadow: 0 12px 24px rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+}
 
 .card .icon { font-size: 40px; color: var(--primary-green); margin-bottom: 15px; }
+.card .icon i {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+}
+.card:hover .icon i {
+    transform: scale(1.2) rotate(15deg);
+}
 .card h3 { font-size: 20px; font-weight: 600; margin-bottom: 10px; }
 .card p { font-size: 14px; 
     color: var(--text-color); 
@@ -486,9 +532,6 @@ body.dark-mode .tilt-container:hover img {
 
 /* =========================
    Skills Section
-========================= */
-/* =========================
-   Skills Section - Updated for Single Line
 ========================= */
 #skills {
   background-color: var(--light-gray);
@@ -499,22 +542,24 @@ body.dark-mode .tilt-container:hover img {
 .skills-container {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;      /* Forces all cards into one line */
+  flex-wrap: nowrap;
   gap: 20px;
-  padding: 20px 40px;     /* Added horizontal padding for breathing room */
-  overflow-x: auto;       /* Enables horizontal scrolling if cards exceed screen width */
-  scrollbar-width: thin;  /* For Firefox scrollbar styling */
-  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  padding: 20px 40px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .skill-card {
   background: var(--bg-color);
   border-radius: 20px;
-  flex: 0 0 300px;        /* Fixes the width to 300px so they don't shrink */
+  flex: 0 0 300px;
   box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.05);
   padding: 40px 25px;
   text-align: left;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
   border: 1px solid transparent;
 }
 
@@ -532,23 +577,57 @@ body.dark-mode .tilt-container:hover img {
 
 .skill-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  border: 1px solid var(--primary-green);
+  box-shadow: 0 12px 24px rgba(16, 185, 129, 0.1);
+  border-color: var(--primary-green);
+}
+
+body.dark-mode .skill-card:hover {
+  box-shadow: 0 12px 24px rgba(16, 185, 129, 0.15);
 }
 
 .skill-card .header { display: flex; align-items: center; margin-bottom: 20px; }
 .skill-card .icon { font-size: 28px; color: var(--primary-green); margin-right: 15px; }
+.skill-card .icon i {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-block;
+}
+.skill-card:hover .icon i {
+    transform: scale(1.2) translateY(-3px);
+}
 .skill-card h3 { font-size: 18px; font-weight: 600; }
 
 .skills-grid { display: flex; flex-wrap: wrap; gap: 10px; }
 .skill-tag {
-  background:var(--secondary-color);
+  background: var(--secondary-color);
   padding: 8px 15px;
   border-radius: 5px;
   font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
+
+/* Staggered Wave Lift Animation */
+@keyframes skill-tag-reveal {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.skill-card:hover .skill-tag {
+  animation: skill-tag-reveal 0.5s ease-out;
+}
+
+.skill-card:hover .skill-tag:nth-child(1) { animation-delay: 0s; }
+.skill-card:hover .skill-tag:nth-child(2) { animation-delay: 0.05s; }
+.skill-card:hover .skill-tag:nth-child(3) { animation-delay: 0.1s; }
+.skill-card:hover .skill-tag:nth-child(4) { animation-delay: 0.15s; }
+.skill-card:hover .skill-tag:nth-child(5) { animation-delay: 0.2s; }
+.skill-card:hover .skill-tag:nth-child(6) { animation-delay: 0.25s; }
+.skill-card:hover .skill-tag:nth-child(7) { animation-delay: 0.3s; }
+.skill-card:hover .skill-tag:nth-child(8) { animation-delay: 0.35s; }
+.skill-card:hover .skill-tag:nth-child(9) { animation-delay: 0.4s; }
+.skill-card:hover .skill-tag:nth-child(10) { animation-delay: 0.45s; }
 
 /* =========================
    Projects Section
