@@ -593,94 +593,248 @@ color: var(--heading-color);
 }
 
 /* =========================
-   Experience Section
+   Experience Section Redesign
 ========================= */
-#experience{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-
-}
-.experience-section {
-  margin: 0 auto;
-  padding: 40px 20px;
-}
-.timeline{
-    max-width: 900px;
-}
-.experience-section h1 {
-  font-size: 3rem;
-  text-align: center;
-  font-weight: 600;
-  margin-bottom: 5px;
+#experience {
+  width: 100%;
+  padding: 80px 20px;
 }
 
-.experience-section p.subtitle {
-  text-align: center;
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 40px;
-}
-
-.timeline {
+.experience-section .timeline {
   position: relative;
-  margin-left: 20px;
-  border-left: 2px solid #e0e0e0;
+  max-width: 1100px;
+  margin: 50px auto 0;
+  padding: 0;
+  border-left: none;
+}
+
+.experience-section .timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--secondary-color), var(--primary-green), var(--secondary-color));
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+  border-radius: 2px;
 }
 
 .timeline-item {
   position: relative;
+  width: 50%;
+  margin-bottom: 50px;
   display: flex;
-  align-items: flex-start;
-  margin-bottom: 30px;
+  justify-content: flex-end;
+}
+
+.timeline-item.timeline-right {
+  left: 50%;
+  justify-content: flex-start;
+}
+
+.timeline-item.timeline-left {
+  left: 0;
 }
 
 .timeline-dot {
   position: absolute;
-  left: -8px;
-  top: 24px;
-  width: 15px;
-  height: 15px;
+  top: 25px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
   background: var(--primary-green);
   border-radius: 50%;
-  z-index: 1;
+  z-index: 10;
+  border: 4px solid var(--bg-color);
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+  transition: all 0.3s ease;
+}
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(22, 163, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0);
+  }
+}
+
+.timeline-item:hover .timeline-dot {
+  animation: pulse-glow 1.5s infinite;
+  background: var(--primary-green);
+  transform: scale(1.2);
+}
+
+.timeline-item.timeline-right .timeline-dot {
+  left: -10px;
+  right: auto;
 }
 
 .timeline-content {
-  background: var(--light-gray);
-  border-radius: 8px;
-  padding: 20px;
-  margin-left: 30px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  flex: 1;
+  position: relative;
+  width: 88%;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(22, 163, 74, 0.15);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  margin-left: 0;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+body.dark-mode .timeline-content {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(192, 132, 252, 0.15);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-item:hover .timeline-content {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(22, 163, 74, 0.1);
+  border-color: var(--primary-green);
+}
+
+body.dark-mode .timeline-item:hover .timeline-content {
+  box-shadow: 0 15px 35px rgba(192, 132, 252, 0.15);
 }
 
 .timeline-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.role { font-size: 1.1rem; font-weight: bold; }
-.company { color: var(--primary-green); 
-    font-size: 0.9rem; 
-    margin-bottom: 10px; }
-.date { font-size: 0.85rem; color: #777; display: flex; align-items: center; gap: 5px; }
-.timeline-content p {
-  font-size: 0.9rem;
-  color:var(--text-color);
-  line-height: 20px;
-  margin: 10px 0;
-  text-align: left;
+.role {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.achievement { font-size: 0.85rem; 
-    color: var(--primary-green); 
-    display: flex; 
-    font-weight: bold;
-    align-items: center;
-     gap: 6px; }
+
+.role i {
+  color: var(--primary-green);
+  font-size: 1.1rem;
+}
+
+.date {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-color);
+  background: var(--secondary-color);
+  padding: 4px 12px;
+  border-radius: 30px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.9;
+}
+
+body.dark-mode .date {
+  color: #fff;
+}
+
+.company {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-green);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timeline-content p {
+  font-size: 0.95rem;
+  color: var(--text-color);
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.achievements-list {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.achievements-list li {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  transition: transform 0.2s ease;
+}
+
+.achievements-list li i {
+  color: var(--primary-green);
+  margin-top: 4px;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+}
+
+.achievements-list li:hover {
+  transform: translateX(4px);
+}
+
+.timeline-item.timeline-left .timeline-content {
+  margin-right: 35px;
+}
+
+.timeline-item.timeline-right .timeline-content {
+  margin-left: 35px;
+}
+
+/* Mobile timeline override rules */
+@media (max-width: 768px) {
+  .experience-section .timeline::after {
+    left: 20px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    left: 0 !important;
+    justify-content: flex-start;
+    margin-bottom: 40px;
+  }
+
+  .timeline-dot {
+    left: 10px !important;
+    right: auto !important;
+  }
+
+  .timeline-content {
+    width: calc(100% - 50px);
+    margin-left: 45px !important;
+    margin-right: 0 !important;
+    padding: 22px;
+  }
+
+  .timeline-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .date {
+    margin-top: 5px;
+  }
+}
+
 
 /* =========================
    Education / Contact / Footer
