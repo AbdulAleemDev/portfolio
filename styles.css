@@ -671,15 +671,43 @@ body.dark-mode .skill-card:hover {
 
 .project-card {
   background: var(--bg-color);
-  border-radius: 10px;
+  border-radius: 16px;
   box-shadow: var(--card-shadow);
   overflow: hidden;
   max-width: 350px;
   flex: 0 0 350px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease, border-color 0.4s ease;
   border: 1px solid transparent;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.12), transparent 80%);
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+body.dark-mode .project-card::before {
+  background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(16, 185, 129, 0.18), transparent 80%);
+}
+
+.project-card:hover::before {
+  opacity: 1;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 2;
 }
 
 .slider-arrow {
@@ -722,11 +750,25 @@ body.dark-mode .skill-card:hover {
 
 .project-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-  border: 1px solid var(--primary-green);
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.1);
+  border-color: var(--primary-green);
 }
 
-.project-card img { width: 100%; height: 180px; object-fit: cover; }
+body.dark-mode .project-card:hover {
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.15);
+}
+
+.project-card img { 
+  width: 100%; 
+  height: 180px; 
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.project-card:hover img {
+  transform: scale(1.04);
+}
+
 .project-content { padding: 20px; flex: 1; }
 .project-content h3 { font-size: 1.2rem; margin-bottom: 10px;
 color: var(--heading-color);
@@ -742,7 +784,18 @@ color: var(--heading-color);
   padding: 4px 8px;
   border-radius: 5px;
   margin: 2px;
+  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease;
 }
+
+.project-card:hover .tag {
+  animation: skill-tag-reveal 0.5s ease-out;
+}
+
+.project-card:hover .tag:nth-child(1) { animation-delay: 0s; }
+.project-card:hover .tag:nth-child(2) { animation-delay: 0.05s; }
+.project-card:hover .tag:nth-child(3) { animation-delay: 0.1s; }
+.project-card:hover .tag:nth-child(4) { animation-delay: 0.15s; }
+
 .highlight {
      color: var(--primary-green); 
      font-weight: bold;
@@ -762,12 +815,15 @@ color: var(--heading-color);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: transform 0.2s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
-.view-project-btn:hover {
-  transform: translateX(4px);
-  color: var(--primary-green);
+.view-project-btn i {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.view-project-btn:hover i {
+  transform: translate(3px, -3px);
 }
 
 /* =========================
