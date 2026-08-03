@@ -333,10 +333,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================================
-   Cursor Spotlight Tracking for Cards, Skill Cards, & Project Cards
+   Cursor Spotlight Tracking for Cards, Skill Cards, Project Cards, & Contact Cards
    ========================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  const cards = document.querySelectorAll(".card, .skill-card, .project-card");
+  const cards = document.querySelectorAll(".card, .skill-card, .project-card, .contact-card");
   
   cards.forEach((card) => {
     card.addEventListener("mousemove", (e) => {
