@@ -546,7 +546,8 @@ body.dark-mode .card:hover {
   gap: 20px;
   padding: 20px 40px;
   overflow-x: auto;
-  scrollbar-width: thin;
+  scrollbar-width: auto;
+  scrollbar-color: var(--primary-green) rgba(16, 185, 129, 0.05);
   -webkit-overflow-scrolling: touch;
 }
 
@@ -565,7 +566,7 @@ body.dark-mode .card:hover {
 
 /* Custom Scrollbar Styling for a cleaner look */
 .skills-container::-webkit-scrollbar {
-  height: 6px;
+  height: 8px;
 }
 .skills-container::-webkit-scrollbar-thumb {
   background-color: var(--primary-green);
