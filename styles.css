@@ -568,7 +568,7 @@ body.dark-mode .card:hover {
   height: 6px;
 }
 .skills-container::-webkit-scrollbar-thumb {
-  background: linear-gradient(90deg, var(--primary-green) 0%, #10b981 100%);
+  background-color: var(--primary-green);
   border-radius: 10px;
 }
 .skills-container::-webkit-scrollbar-track {
