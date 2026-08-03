@@ -49,11 +49,12 @@
 
 <!-- Hero Section -->
     <section class="top-section">
+        <canvas id="hero-canvas"></canvas>
         <div class="top-section-container">
-            <div class="top-content">
+            <div class="top-content reveal">
                 <i class="fa-solid fa-brain"></i>
                 <h1>Abdul Aleem</h1>
-                <h4>AI & ML Engineer | Data Scientist | AI Trainer</h4>
+                <h4 id="typewriter-text" data-words='["AI & ML Engineer", "Data Scientist", "AI Trainer", "Automation Specialist"]'>AI & ML Engineer</h4>
                 <p>Transforming data into intelligent solutions. Specialized in deep learning, computer vision, and scalable AI systems that drive business impact.</p>
                 <div class="button-container">
                     <a href="src/Abdul%20Aleem%20Generative%20AI%20Engineer.pdf" class="cta-btn" download>Download CV</a>
@@ -65,19 +66,19 @@
 
     <!-- About Me Section -->
     <section class="about-section" id="about">
-        <div class="about-first" >
+        <div class="about-first reveal">
             <h1 class="section-heading">About Me</h1>
             <p class="section-para">Passionate about building intelligent systems that solve real-world problems through the power of machine learning and artificial intelligence.</p>
         </div>
 
         <div class="about-second">
-            <div class="about-left">
+            <div class="about-left reveal-left">
                 <h3>My Journey</h3>
                 <p>As a Generative AI & Automation Engineer, my journey focuses on building intelligent, scalable systems that bridge the gap between complex algorithms and real-world business needs. I have hands-on experience building LLM-powered applications using advanced frameworks like LangChain and LangGraph, specializing in RAG pipelines, autonomous AI agents, and custom workflow automations using tools like n8n.</p>
                 <p>With a strong foundation in Machine Learning, NLP, and Transformer architectures, I have integrated and deployed production-ready AI solutions across different platforms. I am passionate about advancing the field of agentic AI and continuously exploring new research to design state-of-the-art automated systems.
 </p>
           <div class="card-container">
-        <div class="card">
+        <div class="card reveal">
             <div class="icon">
                 <i class="fas fa-bullseye"></i>
             </div>
@@ -85,7 +86,7 @@
             <p>Tackling complex challenges with innovative ML solutions</p>
         </div>
 
-        <div class="card">
+        <div class="card reveal">
             <div class="icon">
                 <i class="fas fa-users"></i>
             </div>
@@ -96,18 +97,18 @@
         
             </div>
             
-            <div class="about-right">
+            <div class="about-right reveal-right">
                 <img src="src/image.jpg" alt="Person working on AI">
             </div>
         </div>
     </section><!-- Skill Section -->
 <section class="skill-section" id="skills">
-    <div class="section-header">
+    <div class="section-header reveal">
         <h1 class="section-heading">Technical Skills</h1>
         <p class="section-para">Expertise in Generative AI engineering, machine learning, and workflow automation</p>
     </div>
     <div class="skills-container">
-        <div class="skill-card">
+        <div class="skill-card reveal">
             <div class="header">
                 <div class="icon">
                     <i class="fas fa-robot"></i>
@@ -125,7 +126,7 @@
             </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card reveal">
             <div class="header">
                 <div class="icon">
                     <i class="fas fa-code"></i>
@@ -140,7 +141,7 @@
             </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card reveal">
             <div class="header">
                 <div class="icon">
                     <i class="fas fa-globe"></i>
@@ -161,7 +162,7 @@
             </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card reveal">
             <div class="header">
                 <div class="icon">
                     <i class="fas fa-brain"></i>
@@ -178,7 +179,7 @@
             </div>
         </div>
 
-        <div class="skill-card">
+        <div class="skill-card reveal">
             <div class="header">
                 <div class="icon">
                     <i class="fas fa-laptop-code"></i>
@@ -200,9 +201,11 @@
  <!-- Education Section -->
       
 <section id="education" class="my-5">
-    <h1 class="section-heading">Education & Certification</h1>
-    <p class="section-para">I hold a <b>Bachelor’s degree in Information Technology</b> and eight internationally recognized certifications.</p>
-  <div id="certificateCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="reveal">
+        <h1 class="section-heading">Education & Certification</h1>
+        <p class="section-para">I hold a <b>Bachelor’s degree in Information Technology</b> and eight internationally recognized certifications.</p>
+    </div>
+  <div id="certificateCarousel" class="carousel slide reveal" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
         <img src="src/img1.jpg" class="d-block w-100" alt="Certificate 1">
@@ -242,10 +245,12 @@
 
         <!-- Project Section -->
 <section class="project-section" id="projects">
-    <h1 class="section-heading">Featured Projects</h1>
-    <p class="section-para">Real-world applications of machine learning and AI</p>
+    <div class="reveal">
+        <h1 class="section-heading">Featured Projects</h1>
+        <p class="section-para">Real-world applications of machine learning and AI</p>
+    </div>
 
-    <div class="projects-slider-wrapper">
+    <div class="projects-slider-wrapper reveal">
         <button class="slider-arrow prev-arrow" id="project-prev" aria-label="Previous projects">
             <i class="fas fa-chevron-left"></i>
         </button>
@@ -475,13 +480,15 @@
 
         <!-- Experience section -->
  <section class="experience-section" id="experience">
-    <h1 class="section-heading">Experience</h1>
-    <p class="section-para">Building AI solutions across different industries</p>
+    <div class="reveal">
+        <h1 class="section-heading">Experience</h1>
+        <p class="section-para">Building AI solutions across different industries</p>
+    </div>
 
     <div class="timeline">
 
         <!-- Item 1: AXEL -->
-        <div class="timeline-item">
+        <div class="timeline-item reveal-left">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <div class="timeline-header">
@@ -497,7 +504,7 @@
         </div>
 
         <!-- Item 2: DevelopersHub.co -->
-        <div class="timeline-item">
+        <div class="timeline-item reveal-left">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <div class="timeline-header">
@@ -512,7 +519,7 @@
         </div>
 
         <!-- Item 3 -->
-        <div class="timeline-item">
+        <div class="timeline-item reveal-left">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <div class="timeline-header">
@@ -528,7 +535,7 @@
         </div>
 
         <!-- Item 4 -->
-        <div class="timeline-item">
+        <div class="timeline-item reveal-left">
             <div class="timeline-dot"></div>
             <div class="timeline-content">
                 <div class="timeline-header">
@@ -548,14 +555,14 @@
 
     <!-- Footer Section -->
 <section class="footer-section" id="contact">
- <div class="section-header">
+ <div class="section-header reveal">
         <h1 class="section-heading">Let's Work Together</h1>
         <p class="section-para">Ready to tackle your next machine learning challenge? Let's discuss how we can build something amazing.</p>
     </div>
 
     <div class="contact-cards-container">
         
-        <div class="contact-card">
+        <div class="contact-card reveal">
             <a href="mailto:aleem046098@gmail.com" target="_blank" rel="noopener noreferrer">
             <div class="icon">
                 <i class="fas fa-envelope"></i>
@@ -564,7 +571,7 @@
             <p>aleem046098@gmail.com</p></a>
         </div>
 
-        <div class="contact-card">
+        <div class="contact-card reveal">
             <a href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile" target="_blank" rel="noopener noreferrer">
                 <div class="icon">
                 <i class="fab fa-linkedin"></i>
@@ -574,7 +581,7 @@
             </a>
         </div>
 
-        <div class="contact-card">
+        <div class="contact-card reveal">
             <a href="https://github.com/AbdulAleemDev"target="_blank" rel="noopener noreferrer">
             <div class="icon">
                 <i class="fab fa-github"></i>
@@ -584,13 +591,13 @@
             </a>
         </div>
     </div>
-    <div class="parent-call-to-action">
+    <div class="parent-call-to-action reveal">
             <div class="call-to-action-card">
         <h3>Ready to innovate?</h3>
         <p>
             Whether you need ML consulting, want to discuss a project, or are looking for a passionate AI engineer to join your team, I'd love to hear from you.
         </p>
-        <a href="https://wa.me/923284836277" target="_blank" class="button" class="button">Start a Whatsapp Conversation</a>
+        <a href="https://wa.me/923284836277" target="_blank" class="button">Start a Whatsapp Conversation</a>
     </div>
     
     </div>

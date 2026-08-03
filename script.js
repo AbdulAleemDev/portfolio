@@ -155,3 +155,184 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+/* ==========================================================
+   Scroll Reveal Animation System (using Intersection Observer)
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const reveals = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observer.unobserve(entry.target); // Trigger only once
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  });
+
+  reveals.forEach((element) => {
+    observer.observe(element);
+  });
+});
+
+/* ==========================================================
+   Typewriter Effect (Hero Subtitle Typing Loop)
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const element = document.getElementById("typewriter-text");
+  if (!element) return;
+
+  const words = JSON.parse(element.getAttribute("data-words"));
+  let wordIdx = 0;
+  let charIdx = 0;
+  let isDeleting = false;
+  let currentWord = "";
+
+  function type() {
+    const fullWord = words[wordIdx];
+    
+    if (isDeleting) {
+      currentWord = fullWord.substring(0, charIdx - 1);
+      charIdx--;
+    } else {
+      currentWord = fullWord.substring(0, charIdx + 1);
+      charIdx++;
+    }
+
+    element.textContent = currentWord;
+
+    let typeSpeed = isDeleting ? 40 : 90;
+
+    if (!isDeleting && currentWord === fullWord) {
+      typeSpeed = 1800; // Pause at complete word
+      isDeleting = true;
+    } else if (isDeleting && currentWord === "") {
+      isDeleting = false;
+      wordIdx = (wordIdx + 1) % words.length;
+      typeSpeed = 400; // Pause before starting new word
+    }
+
+    setTimeout(type, typeSpeed);
+  }
+
+  type();
+});
+
+/* ==========================================================
+   Neural Network Interactive Canvas Particle Background
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const canvas = document.getElementById("hero-canvas");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const topSection = canvas.parentElement;
+
+  let width = (canvas.width = topSection.offsetWidth);
+  let height = (canvas.height = topSection.offsetHeight);
+
+  window.addEventListener("resize", () => {
+    width = canvas.width = topSection.offsetWidth;
+    height = canvas.height = topSection.offsetHeight;
+  });
+
+  const particles = [];
+  const maxParticles = window.innerWidth < 768 ? 40 : 80;
+  const connectionDist = 110;
+  const mouse = { x: null, y: null, radius: 140 };
+
+  topSection.addEventListener("mousemove", (e) => {
+    const rect = topSection.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+  });
+
+  topSection.addEventListener("mouseleave", () => {
+    mouse.x = null;
+    mouse.y = null;
+  });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.7;
+      this.vy = (Math.random() - 0.5) * 0.7;
+      this.radius = Math.random() * 2 + 1;
+    }
+
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+
+      // Interaction with mouse pointer position
+      if (mouse.x !== null && mouse.y !== null) {
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < mouse.radius) {
+          const force = (mouse.radius - dist) / mouse.radius;
+          const angle = Math.atan2(dy, dx);
+          this.x += Math.cos(angle) * force * 1.5;
+          this.y += Math.sin(angle) * force * 1.5;
+        }
+      }
+    }
+
+    draw() {
+      // Fetch dynamic primary-green theme color value (hex, rgb, etc.)
+      const color = getComputedStyle(document.body).getPropertyValue('--primary-green').trim();
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  // Populate particles list
+  for (let i = 0; i < maxParticles; i++) {
+    particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+
+    const color = getComputedStyle(document.body).getPropertyValue('--primary-green').trim();
+    ctx.strokeStyle = color;
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < connectionDist) {
+          ctx.lineWidth = 1 - dist / connectionDist;
+          ctx.globalAlpha = (1 - dist / connectionDist) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+    ctx.globalAlpha = 1.0; // Reset canvas context alpha state
+
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+});
+
