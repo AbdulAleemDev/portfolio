@@ -1333,8 +1333,6 @@ body.dark-mode .carousel-control-next-btn {
   background-clip: text;
   position: relative;
   display: inline-block;
-  left: 50%;
-  transform: translateX(-50%);
   margin-bottom: 25px;
   letter-spacing: -0.5px;
   transition: transform 0.3s ease;
@@ -1365,7 +1363,7 @@ body.dark-mode .section-heading {
 }
 
 .section-heading:hover {
-  transform: translateX(-50%) scale(1.02);
+  transform: scale(1.02);
 }
 
 .section-para {
