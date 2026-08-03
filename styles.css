@@ -1327,10 +1327,6 @@ body.dark-mode .carousel-control-next-btn {
   font-size: 3.2rem;
   font-weight: 800;
   text-align: center !important;
-  background: linear-gradient(135deg, var(--heading-color) 30%, var(--primary-green) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
   position: relative;
   display: block;
   width: max-content;
@@ -1342,6 +1338,10 @@ body.dark-mode .carousel-control-next-btn {
 
 .section-heading span {
   display: inline-block;
+  background: linear-gradient(135deg, var(--heading-color) 30%, var(--primary-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   animation: dynamic-heading-glow 2.2s infinite ease-in-out;
 }
 
@@ -1360,7 +1360,7 @@ body.dark-mode .carousel-control-next-btn {
   }
 }
 
-body.dark-mode .section-heading {
+body.dark-mode .section-heading span {
   background: linear-gradient(135deg, #f8fafc 40%, var(--primary-green) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
