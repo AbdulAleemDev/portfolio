@@ -312,13 +312,53 @@ nav.center ul li a:hover,
    About Section
 ========================= */
 .about-section {
-  padding: 50px 20px;
-  margin-bottom: 100px;
+  position: relative;
+  padding: 80px 20px;
+  margin-bottom: 80px;
+  overflow: hidden;
+}
+
+.about-section::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, rgba(0, 0, 0, 0) 70%);
+  top: 10%;
+  left: -150px;
+  z-index: 0;
+  pointer-events: none;
+  animation: float-blob-left 15s infinite alternate ease-in-out;
+}
+
+.about-section::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+  bottom: 10%;
+  right: -150px;
+  z-index: 0;
+  pointer-events: none;
+  animation: float-blob-right 20s infinite alternate ease-in-out;
+}
+
+@keyframes float-blob-left {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(50px, 30px) scale(1.15); }
+}
+
+@keyframes float-blob-right {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-60px, -40px) scale(1.2); }
 }
 
 .about-first {
   text-align: center;
   margin-bottom: 50px;
+  position: relative;
+  z-index: 2;
 }
 
 .about-first h1 { font-size: 3rem; font-weight: 600; }
@@ -333,24 +373,83 @@ nav.center ul li a:hover,
 
 .about-second {
   display: flex;
-  gap: 20px;
+  gap: 40px;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
 }
 
-.about-left { flex: 1; }
+.about-left { flex: 1.2; }
 .about-left h3 { font-size: 1.8rem; color: var(--primary-green); margin-bottom: 20px; }
 .about-left p { 
-    font-size: 1rem;
-     color:var(--text-color);
-      line-height: 1.8;
-       margin: 20px 0; }
+  font-size: 1.05rem;
+  color: var(--text-color);
+  line-height: 1.8;
+  margin: 20px 0; 
+}
 
-.about-right { flex: 1; text-align: right; }
-.about-right img {
-  width: 70%;
-  border: 30px solid var(--secondary-color);
-  border-radius: 15px;
+/* Inline Tech Highlights */
+.tech-badge-inline {
+  display: inline-block;
+  background: rgba(16, 185, 129, 0.08);
+  color: var(--primary-green);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 1px 8px;
+  border-radius: 6px;
+  font-weight: 550;
+  font-size: 0.95em;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+body.dark-mode .tech-badge-inline {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.tech-badge-inline:hover {
+  transform: translateY(-2px);
+  background: var(--primary-green);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.about-right { 
+  flex: 0.8; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 3D Perspective Tilt Wrapper */
+.tilt-container {
+  width: 80%;
+  aspect-ratio: 1;
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.15s ease;
+  cursor: pointer;
+}
+
+.tilt-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 15px solid var(--secondary-color);
+  border-radius: 20px;
+  box-shadow: var(--card-shadow);
+  transition: box-shadow 0.3s ease;
+  transform: translateZ(20px); /* Lift element off base */
+}
+
+.tilt-container:hover img {
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.25);
+}
+
+body.dark-mode .tilt-container:hover img {
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.35);
 }
 
 /* Cards */

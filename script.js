@@ -336,3 +336,33 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 });
 
+/* ==========================================================
+   3D Tilt Interaction for Profile Image
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".tilt-container");
+  if (!container) return;
+
+  // Only enable on desktop/pointer devices to prevent layout jumps on touch screen devices
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+
+  container.addEventListener("mousemove", (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const rotateX = ((centerY - y) / centerY) * 15;
+    const rotateY = ((x - centerX) / centerX) * 15;
+    
+    container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+  });
+
+  container.addEventListener("mouseleave", () => {
+    container.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+  });
+});
+
+
