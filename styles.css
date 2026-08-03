@@ -39,15 +39,15 @@ body {
 
     /* Dark theme */
   body.dark-mode {
-  --primary-green: #c084fc; /* purple */
-  --secondary-color: rgb(131 24 67 / 0.2);
-  --heading-color: #f4f4f4;
-  --text-color: #e5e7eb;
-  --light-gray: #1e1e1e;
-  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
-  --background-color-hero: rgb(131 24 67 / 0.2);
-  --bg-color: #0f172a; /* dark background */
-  --header-bg: rgb(15 23 42 / 0.95);
+  --primary-green: #10b981; /* Glowing emerald green */
+  --secondary-color: rgba(16, 185, 129, 0.12); /* Translucent emerald */
+  --heading-color: #f8fafc;
+  --text-color: #cbd5e1;
+  --light-gray: #1e293b;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --background-color-hero: rgba(16, 185, 129, 0.04);
+  --bg-color: #0b0f19; /* Premium deep slate blue */
+  --header-bg: rgba(11, 15, 25, 0.9);
 }
 
     header {
