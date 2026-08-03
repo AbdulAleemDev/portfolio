@@ -1092,46 +1092,136 @@ body.dark-mode .date {
   padding:50px 0 50px 0;
 }
 /* =========================
-   Certificate Carousel
+   Certificate Carousel Redesign
 ========================= */
 #certificateCarousel {
-  max-width: 800px;
-  margin: 100px auto;
+  max-width: 850px;
+  margin: 60px auto;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: 24px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.03);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+body.dark-mode #certificateCarousel {
+  background: rgba(15, 23, 42, 0.4);
+  border-color: rgba(16, 185, 129, 0.15);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+#certificateCarousel:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px rgba(16, 185, 129, 0.12);
+  border-color: var(--primary-green);
+}
+
+#certificateCarousel .carousel-item {
+  overflow: hidden;
+  border-radius: 16px;
+  position: relative;
 }
 
 #certificateCarousel .carousel-item img {
   width: 100%;
   height: auto;
-  max-height: 550px;
+  max-height: 520px;
   object-fit: contain;
-  border-radius: 10px;
-  border: 15px solid var(--secondary-color);
-  background-color: var(--secondary-color);
+  border-radius: 16px;
+  border: none;
+  background-color: transparent;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
-/* Arrows */
+#certificateCarousel:hover .carousel-item img {
+  transform: scale(1.02);
+}
+
+/* Elegant glass caption */
+.certificate-caption {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: var(--heading-color);
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+body.dark-mode .certificate-caption {
+  background: rgba(11, 15, 25, 0.75);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+#certificateCarousel:hover .certificate-caption {
+  transform: translateX(-50%) translateY(-5px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.2);
+}
+
+/* Carousel Control arrows re-styled */
+.carousel-control-prev-btn, .carousel-control-next-btn {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .carousel-control-prev-btn,
+body.dark-mode .carousel-control-next-btn {
+  background: rgba(11, 15, 25, 0.75);
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+.carousel-control-prev-btn:hover, .carousel-control-next-btn:hover {
+  background: var(--primary-green);
+  color: #fff;
+  transform: scale(1.15);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+  border-color: var(--primary-green);
+}
+
+.carousel-control-prev-btn:hover .carousel-arrow-icon,
+.carousel-control-next-btn:hover .carousel-arrow-icon {
+  color: #fff;
+}
+
 .carousel-arrow-icon {
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-size: 1.2rem;
   color: var(--primary-green);
-  transition: transform 0.2s ease, color 0.3s ease;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-control-prev:hover .carousel-arrow-icon,
-.carousel-control-next:hover .carousel-arrow-icon {
-  transform: scale(1.2);
-  color: var(--primary-green);
+  transition: color 0.3s ease;
 }
 
 .carousel-control-prev,
 .carousel-control-next { 
   width: 8%; 
-  opacity: 0.8;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.carousel-control-prev:hover,
-.carousel-control-next:hover {
+#certificateCarousel:hover .carousel-control-prev,
+#certificateCarousel:hover .carousel-control-next {
   opacity: 1;
 }
 
