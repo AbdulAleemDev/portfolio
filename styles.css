@@ -1337,7 +1337,20 @@ body.dark-mode .carousel-control-next-btn {
   max-width: 90%;
   margin: 0 auto 25px auto;
   letter-spacing: -0.5px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+  animation: dynamic-heading-glow 3s infinite ease-in-out;
+}
+
+@keyframes dynamic-heading-glow {
+  0% {
+    filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.05));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.25));
+  }
+  100% {
+    filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.05));
+  }
 }
 
 body.dark-mode .section-heading {
@@ -1365,7 +1378,7 @@ body.dark-mode .section-heading {
 }
 
 .section-heading:hover {
-  transform: scale(1.02);
+  transform: scale(1.06);
 }
 
 .section-para {
