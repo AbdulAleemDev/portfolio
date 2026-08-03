@@ -383,5 +383,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+/* ==========================================================
+   Parallax Scroll for Scrollytelling Section
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const parallaxBg = document.getElementById("scrolly-parallax-bg");
+  if (!parallaxBg) return;
+  const section = parallaxBg.parentElement;
+
+  window.addEventListener("scroll", () => {
+    const rect = section.getBoundingClientRect();
+    const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+    
+    // Check if section is in viewport boundaries
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      // Moves background from -45px to 45px relative scroll progress
+      const yOffset = (scrollPercent - 0.5) * 90;
+      parallaxBg.style.transform = `translateY(${yOffset}px)`;
+    }
+  });
+});
+
+
 
 
