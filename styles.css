@@ -1332,8 +1332,10 @@ body.dark-mode .carousel-control-next-btn {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   position: relative;
-  display: inline-block;
-  margin-bottom: 25px;
+  display: block;
+  width: max-content;
+  max-width: 90%;
+  margin: 0 auto 25px auto;
   letter-spacing: -0.5px;
   transition: transform 0.3s ease;
 }
