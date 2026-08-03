@@ -8,40 +8,7 @@ window.addEventListener("scroll", function () {
   }
 });
 
-// Image sliding (safe version)
-const slides = Array.from(document.querySelectorAll('.image-card'));
-let index = 0;
-let locked = false;
 
-function move(dir) {
-  if (locked) return;
-  locked = true;
-
-  const current = slides[index];
-  const nextIndex = (index + dir + slides.length) % slides.length;
-  const next = slides[nextIndex];
-
-  next.className = 'image-card ' + (dir === 1 ? 'enter-from-right' : 'enter-from-left');
-  void next.offsetWidth; // force reflow
-
-  current.className = 'image-card active ' + (dir === 1 ? 'exit-to-left' : 'exit-to-right');
-  next.className = 'image-card active';
-
-  current.addEventListener('transitionend', () => {
-    index = nextIndex;
-    locked = false;
-  }, { once: true });
-}
-
-const leftArrow = document.querySelector('.arrow.left');
-const rightArrow = document.querySelector('.arrow.right');
-if (leftArrow) leftArrow.addEventListener('click', () => move(-1));
-if (rightArrow) rightArrow.addEventListener('click', () => move(1));
-
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') move(-1);
-  if (e.key === 'ArrowRight') move(1);
-});
 
 // Dark mode toggle
 document.addEventListener("DOMContentLoaded", () => {
@@ -384,22 +351,47 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ==========================================================
-   Parallax Scroll for Scrollytelling Section
+   Scrollytelling 2.0 Scroll Logic
    ========================================================== */
-document.addEventListener("DOMContentLoaded", () => {
-  const parallaxBg = document.getElementById("scrolly-parallax-bg");
-  if (!parallaxBg) return;
-  const section = parallaxBg.parentElement;
+window.addEventListener("scroll", () => {
+  const section = document.querySelector(".scrollytelling-section");
+  if (!section) return;
 
-  window.addEventListener("scroll", () => {
-    const rect = section.getBoundingClientRect();
-    const scrollPercent = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+  const rect = section.getBoundingClientRect();
+  const sectionHeight = rect.height;
+  const viewportHeight = window.innerHeight;
+  
+  const scrollOffset = -rect.top;
+  const totalScrollRange = sectionHeight - viewportHeight;
+  
+  if (totalScrollRange <= 0) return;
+  
+  const progress = Math.max(0, Math.min(1, scrollOffset / totalScrollRange));
+  
+  const parallaxText = document.querySelector(".parallax-text-huge");
+  const glow = document.querySelector(".scrolly-backdrop-glow");
+  
+  if (parallaxText) {
+    const xOffset = (progress - 0.5) * 120;
+    parallaxText.style.transform = `translateX(${xOffset}px)`;
+  }
+  
+  if (glow) {
+    const scale = 1 + progress * 0.4;
+    const yOffset = (progress - 0.5) * 60;
+    glow.style.transform = `scale(${scale}) translateY(${yOffset}px)`;
+  }
+  
+  const steps = document.querySelectorAll(".scrolly-step");
+  steps.forEach((step) => {
+    const stepRect = step.getBoundingClientRect();
+    const stepCenter = stepRect.top + stepRect.height / 2;
+    const viewportCenter = viewportHeight / 2;
     
-    // Check if section is in viewport boundaries
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      // Moves background from -45px to 45px relative scroll progress
-      const yOffset = (scrollPercent - 0.5) * 90;
-      parallaxBg.style.transform = `translateY(${yOffset}px)`;
+    if (Math.abs(stepCenter - viewportCenter) < viewportHeight * 0.35) {
+      step.classList.add("active");
+    } else {
+      step.classList.remove("active");
     }
   });
 });
