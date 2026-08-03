@@ -565,14 +565,15 @@ body.dark-mode .card:hover {
 
 /* Custom Scrollbar Styling for a cleaner look */
 .skills-container::-webkit-scrollbar {
-  height: 8px;
+  height: 6px;
 }
 .skills-container::-webkit-scrollbar-thumb {
-  background: var(--primary-green);
+  background: linear-gradient(90deg, var(--primary-green) 0%, #10b981 100%);
   border-radius: 10px;
 }
 .skills-container::-webkit-scrollbar-track {
-  background: var(--secondary-color);
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 10px;
 }
 
 .skill-card:hover {
@@ -1636,6 +1637,64 @@ body.dark-mode .scrolly-step.active .step-card {
   }
   .step-card h3 { font-size: 1.35rem; }
   .step-card p { font-size: 0.92rem; }
+}
+
+/* ==========================================================
+   Custom Cursor Styling
+   ========================================================== */
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  
+  a, button, .card, .skill-card, .project-card, .slider-arrow, .carousel-control-prev-btn, .carousel-control-next-btn, .view-project-btn, .scroll-top-btn, input, textarea {
+    cursor: none;
+  }
+  
+  .custom-cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-green);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  }
+  
+  .custom-cursor-outline {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--primary-green);
+    border-radius: 50%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+  }
+  
+  /* Hover effects */
+  body.cursor-hover .custom-cursor-dot {
+    width: 4px;
+    height: 4px;
+    background-color: var(--primary-green);
+  }
+  
+  body.cursor-hover .custom-cursor-outline {
+    width: 48px;
+    height: 48px;
+    border-color: var(--primary-green);
+    background-color: rgba(16, 185, 129, 0.05);
+  }
+}
+
+@media (pointer: coarse) {
+  .custom-cursor-dot,
+  .custom-cursor-outline {
+    display: none;
+  }
 }
 
 

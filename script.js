@@ -396,6 +396,40 @@ window.addEventListener("scroll", () => {
   });
 });
 
+/* ==========================================================
+   Custom Cursor Logic
+   ========================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+  const dot = document.querySelector(".custom-cursor-dot");
+  const outline = document.querySelector(".custom-cursor-outline");
+  
+  if (!dot || !outline) return;
+
+  if (window.matchMedia("(pointer: fine)").matches) {
+    document.addEventListener("mousemove", (e) => {
+      // Direct positioning for solid green dot
+      dot.style.left = e.clientX + "px";
+      dot.style.top = e.clientY + "px";
+      
+      // Outline follows coordinates
+      outline.style.left = e.clientX + "px";
+      outline.style.top = e.clientY + "px";
+    });
+
+    // Add pointer hover listener to all buttons, links, and cards
+    const hoverables = document.querySelectorAll("a, button, .card, .skill-card, .project-card, .slider-arrow, .carousel-control-prev-btn, .carousel-control-next-btn, .view-project-btn, .scroll-top-btn, input, textarea");
+    
+    hoverables.forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        document.body.classList.add("cursor-hover");
+      });
+      el.addEventListener("mouseleave", () => {
+        document.body.classList.remove("cursor-hover");
+      });
+    });
+  }
+});
+
 
 
 
