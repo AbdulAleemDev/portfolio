@@ -1338,7 +1338,7 @@ body.dark-mode .carousel-control-next-btn {
   margin: 0 auto 25px auto;
   letter-spacing: -0.5px;
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.4s ease;
-  animation: dynamic-heading-glow 4s infinite ease-in-out;
+  animation: dynamic-heading-glow 2.2s infinite ease-in-out;
 }
 
 @keyframes dynamic-heading-glow {
